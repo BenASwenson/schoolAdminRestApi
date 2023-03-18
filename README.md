@@ -2,7 +2,7 @@
 
 ---
 
-###REST Guidlines
+### REST Guidlines
   - Resource: The data includes students, courses, grades, and users
   - URI: the location of the resources are identified with logical endpoints, such as "/student/123" to read student with id 123.
   - The Rest API defines the following operations that can manipulate the resources: GET, POST, PUT, DELETE
@@ -12,7 +12,7 @@
 
 ---
 
-###Dependencies
+### Dependencies
   - Spring Boot Starter Data JPA
   - Spring Boot Starter Web
   - Spring Boot Devtools
@@ -25,7 +25,7 @@
 
 ---
 
-###POST operation example
+### POST operation example
 - The consumer is expected to send a POST request. In this example, to create a student, name and birthdate will be the payload sent on the endpoint "/student".  
 ![Image](images/PostCreateStudent.png)
   
@@ -68,7 +68,7 @@ public class StudentServiceImpl implements StudentService {
         return studentRepository.save(student);
     }
 ```
-###Data Store
+### Data Store
 - The datastore, a Mysql DB in a Docker container, is defined with docker-compose.yml:
 ```
 version: '3.3'
@@ -90,7 +90,7 @@ services:
 volumes:
   my-db:
 ```
-###Security 
+### Security 
 - The Security Filter Chain is set up with 3 paths
   - Pathway 1: Anyone submitting request on endpoint "/register" will have access without authentication or authorization
   - Pathway 2: Anyone submitting request on endpoint "/authenticate" will be processed with an authentication filter using an algorithm to encrypt the password to check if it matches the user's kept password.  If successful, a response of 200 and a JWT token will be returned.
