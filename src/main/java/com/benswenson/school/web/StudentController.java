@@ -24,14 +24,14 @@ public class StudentController {
 
     private StudentService studentService;
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Student> getStudent(@PathVariable Long id) {
-        return new ResponseEntity<>(studentService.getStudent(id), HttpStatus.OK);
-    }
-
     @PostMapping
     public ResponseEntity<Student> saveStudent(@RequestBody Student student) {
         return new ResponseEntity<>(studentService.saveStudent(student), HttpStatus.CREATED);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Student> getStudent(@PathVariable Long id) {
+        return new ResponseEntity<>(studentService.getStudent(id), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")

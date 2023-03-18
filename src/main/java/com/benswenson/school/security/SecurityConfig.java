@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -21,7 +22,7 @@ import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 @Configuration
-public class SecurityConfig  {
+public class SecurityConfig {
 
     private BCryptPasswordEncoder passwordEncoder;
     CustomAuthenticationManager customAuthenticationManager;
@@ -32,8 +33,10 @@ public class SecurityConfig  {
         authenticationFilter.setFilterProcessesUrl("/authenticate");
         return http
                 .csrf(csrf -> csrf.disable())
-                .authorizeHttpRequests(requests -> requests
+                .authorizeHttpRequests((requests) -> requests
                                 .requestMatchers(SecurityConstants.REGISTER_PATH).permitAll()
+                                .requestMatchers("/v3/api-docs/**").permitAll()
+                                .requestMatchers("/swagger-ui/**").permitAll()
                                 .anyRequest()
                                 .authenticated()
                                 .and()

@@ -4,10 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
-
 import com.benswenson.school.entity.Student;
 import com.benswenson.school.exception.EntityNotFoundException;
-import com.benswenson.school.exception.StudentNotEnrolledException;
 import com.benswenson.school.repository.StudentRepository;
 
 import lombok.AllArgsConstructor;
@@ -19,14 +17,14 @@ public class StudentServiceImpl implements StudentService {
     private StudentRepository studentRepository;
 
     @Override
-    public Student getStudent(Long id) {
-        Optional<Student> optionalStudent = studentRepository.findById(id);
-        return unwrapStudent(optionalStudent, id);       
+    public Student saveStudent(Student student) {
+        return studentRepository.save(student);
     }
 
     @Override
-    public Student saveStudent(Student student) {
-        return studentRepository.save(student);
+    public Student getStudent(Long id) {
+        Optional<Student> optionalStudent = studentRepository.findById(id);
+        return unwrapStudent(optionalStudent, id);       
     }
 
     @Override
